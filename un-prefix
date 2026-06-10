@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prefix un- Interactive Quiz</title>
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --success-color: #2ec4b6;
+            --error-color: #e71d36;
+            --background-color: #f9f9fb;
+            --card-color: #ffffff;
+            --text-color: #2d3436;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .quiz-container {
+            max-width: 650px;
+            margin: 40px auto;
+            background: var(--card-color);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .instructions {
+            text-align: center;
+            color: #636e72;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+
+        .word-bank {
+            background-color: #f1f2f6;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .word-bank span {
+            margin: 0 10px;
+            color: var(--text-color);
+        }
+
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .input-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            padding: 10px 15px;
+            border: 2px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 1rem;
+            width: 220px;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .feedback {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: none;
+        }
+
+        .feedback.correct {
+            color: var(--success-color);
+            display: block;
+        }
+
+        .feedback.incorrect {
+            color: var(--error-color);
+            display: block;
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 20px;
+        }
+
+        .btn-submit:hover {
+            background-color: #5b4bc4;
+        }
+
+        .score-display {
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-top: 25px;
+            display: none;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>Practice Quiz: The Prefix "un-"</h1>
+    <p class="instructions">Type the correct word into the blanks, then click "Submit Quiz" at the bottom to check your score.</p>
+
+    <form id="quizForm">
+        <h3>Part 1: Flip the Meaning</h3>
+        <p style="color: #636e72; font-size: 0.9rem;">Make the underlined word mean its opposite by adding the prefix <b>un-</b>.</p>
+
+        <div class="question-block">
+            <div class="question-text">1. The old car is still <u>usable</u>. <br><span style="font-size:0.95rem; color:#666;">&rarr; The old car is completely...</span></div>
+            <div class="input-container">
+                <input type="text" id="q1" placeholder="Type opposite of usable" autocomplete="off">
+                <div class="feedback" id="f1"></div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-text">2. Missing class without a reason is <u>acceptable</u>. <br><span style="font-size:0.95rem; color:#666;">&rarr; Missing class without a reason is...</span></div>
+            <div class="input-container">
+                <input type="text" id="q2" placeholder="Type opposite of acceptable" autocomplete="off">
+                <div class="feedback" id="f2"></div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-text">3. The weather here is very <u>predictable</u>. <br><span style="font-size:0.95rem; color:#666;">&rarr; The weather here is very...</span></div>
+            <div class="input-container">
+                <input type="text" id="q3" placeholder="Type opposite of predictable" autocomplete="off">
+                <div class="feedback" id="f3"></div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-text">4. I think his excuse is <u>believable</u>. <br><span style="font-size:0.95rem; color:#666;">&rarr; I think his story is completely...</span></div>
+            <div class="input-container">
+                <input type="text" id="q4" placeholder="Type opposite of believable" autocomplete="off">
+                <div class="feedback" id="f4"></div>
+            </div>
+        </div>
+
+        <h3>Part 2: Situations & Context</h3>
+        <div class="word-bank">
+            Word Bank: <span>unpredictable</span> | <span>unusable</span> | <span>unreliable</span> | <span>unemployable</span>
+        </div>
+
+        <div class="question-block">
+            <div class="question-text">5. My phone screen is completely shattered and the touch sensor doesn't work. The phone is now...</div>
+            <div class="input-container">
+                <input type="text" id="q5" placeholder="Your answer" autocomplete="off">
+                <div class="feedback" id="f5"></div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-text">6. It rains, then it shines, then it snows all in one afternoon! The weather today is highly...</div>
+            <div class="input-container">
+                <input type="text" id="q6" placeholder="Your answer" autocomplete="off">
+                <div class="feedback" id="f6"></div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-text">7. If someone refuses to learn new skills and constantly steals from their workplace, they will become...</div>
+            <div class="input-container">
+                <input type="text" id="q7" placeholder="Your answer" autocomplete="off">
+                <div class="feedback" id="f7"></div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-text">8. Marcos promised to help me move, but he turned off his phone and never showed up. He is so...</div>
+            <div class="input-container">
+                <input type="text" id="q8" placeholder="Your answer" autocomplete="off">
+                <div class="feedback" id="f8"></div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Submit Quiz</button>
+    </form>
+
+    <div class="score-display" id="scoreBoard"></div>
+</div>
+
+<script>
+    const answers = {
+        q1: "unusable",
+        q2: "unacceptable",
+        q3: "unpredictable",
+        q4: "unbelievable",
+        q5: "unusable",
+        q6: "unpredictable",
+        q7: "unemployable",
+        q8: "unreliable"
+    };
+
+    document.getElementById('quizForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        let score = 0;
+        const totalQuestions = Object.keys(answers).length;
+
+        for (let key in answers) {
+            const userInput = document.getElementById(key).value.trim().toLowerCase();
+            const feedbackDiv = document.getElementById('f' + key.substring(1));
+            const inputField = document.getElementById(key);
+
+            if (userInput === answers[key]) {
+                score++;
+                feedbackDiv.textContent = "✓ Correct!";
+                feedbackDiv.className = "feedback correct";
+                inputField.style.borderColor = "var(--success-color)";
+            } else {
+                feedbackDiv.textContent = `✗ Try again. (Answer: ${answers[key]})`;
+                feedbackDiv.className = "feedback incorrect";
+                inputField.style.borderColor = "var(--error-color)";
+            }
+        }
+
+        const scoreBoard = document.getElementById('scoreBoard');
+        scoreBoard.textContent = `You scored ${score} out of ${totalQuestions}!`;
+        scoreBoard.style.display = "block";
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    });
+</script>
+
+</body>
+</html>
